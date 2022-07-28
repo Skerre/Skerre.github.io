@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Social Vulnerability Tajikistan</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+    <link rel="shortcut icon" href="#">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/undplogo.ico">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+    <link rel="stylesheet" href="assets/dist/css/customized.css"/>
+    <!-- Custom styles for this template -->
+    <link href="assets/dist/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-xl-nowrap p-0 shadow">
+        <!-- change col-lg 3 to col lg 12 -->
+        <!-- <a style="background-color: transparent; box-shadow: none" class="navbar-brand col-md-3 col-lg-12 me-0 px-3"
+            href="#">
+            <img src="assets/2200_500_7.png" alt="logo" height="100x" width="100%" style="margin:0px 0px"/> 
+        </a> -->
+        <a href="#" class="pull-left"><img src="assets/SDGAILAB.png" height="100x" width="100%" style="margin:10px 10px"></a> 
+        <a href="#" class="pull-center"><img src="assets/Text_long.png" height="40x" width="100%" style="margin:0px 0px"></a>
+        <a href="#" class="pull-right"><img src="assets/UNDP_Logo.png" height="100x" width="100%" style="margin:0px 0px"></a> 
+    </header>
+
+    
+
+    <div class="container-fluid">
+
+
+        <div class="row">
+
+
+
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse overflow-auto">
+                
+                
+                
+                
+                <h1 class="h4">
+                        
+                    Map Window
+                
+                </h1>
+                
+                <div class="position-sticky pt-3">
+
+                    
+
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a id="show-aoi" class="nav-link" aria-current="page" href="#" style="padding-top: 70px;">
+                                <!-- <span data-feather="home"></span> -->
+                                Show Area of Interest
+                            </a>
+                        </li>
+                        
+                        
+                        
+
+
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#interactive-map-collapse" aria-expanded="true">
+                                Socioeconomic Layers
+                            </button>
+                            <div class="collapse" id="interactive-map-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <strong><p style="padding-left: 20px;"> Social Vulnerability </p></strong>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-1" name="interact-layer-1">
+                                        <label for="interact-layer-1" id="interact-layer-1-label">Social Vulnerability: Random Forest</label>
+                                        <div id="interact-layer-1-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control"
+                                                id="interact-layer-1-slide" 
+                                                name="interact-layer-1-slide" 
+                                                min="0" max="100" value="70">
+                                        </div>
+                                    </li>
+                                    
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-2" name="interact-layer-2">
+                                        <label for="interact-layer-2" id="interact-layer-2-label">Social Vulnerability: XGBoost</label>
+                                        <div id="interact-layer-2-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-2-opacity-val" name="interact-layer-2-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-2-opacity-slide" name="interact-layer-2-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+
+                                    <strong><p style="padding-left: 20px;"> Drive Time </p></strong>
+
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-3" name="interact-layer-3">
+                                        <label for="interact-layer-3" id="interact-layer-3-label">Drive Time: Education Fascility</label>
+                                        <div id="interact-layer-3-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-3-opacity-val" name="interact-layer-3-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-3-opacity-slide" name="interact-layer-3-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-4" name="interact-layer-4">
+                                        <label for="interact-layer-4" id="interact-layer-4-label">Drive Time: Health Institution</label>
+                                        <div id="interact-layer-4-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-4-opacity-val" name="interact-layer-4-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-4-opacity-slide" name="interact-layer-4-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-5" name="interact-layer-5">
+                                        <label for="interact-layer-5" id="interact-layer-5-label">Drive Time: Financial Service</label>
+                                        <div id="interact-layer-5-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-5-opacity-val" name="interact-layer-5-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-5-opacity-slide" name="interact-layer-5-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+
+                                    <strong><p style="padding-left: 20px;"> Additional Layers </p></strong>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-6" name="interact-layer-6">
+                                        <label for="interact-layer-6" id="interact-layer-6-label">Population Counts</label>
+                                        <div id="interact-layer-6-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-6-opacity-val" name="interact-layer-6-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-6-opacity-slide" name="interact-layer-6-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-7" name="interact-layer-7">
+                                        <label for="interact-layer-7" id="interact-layer-7-label">Celltower Counts</label>
+                                        <div id="interact-layer-7-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-7-opacity-val" name="interact-layer-7-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-7-opacity-slide" name="interact-layer-7-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-8" name="interact-layer-8">
+                                        <label for="interact-layer-8" id="interact-layer-8-label">Nightlight Intensity</label>
+                                        <div id="interact-layer-8-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-8-opacity-val" name="interact-layer-8-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-8-opacity-slide" name="interact-layer-8-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-9" name="interact-layer-9">
+                                        <label for="interact-layer-9" id="interact-layer-9-label">Average Elevation</label>
+                                        <div id="interact-layer-9-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-9-opacity-val" name="interact-layer-9-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-9-opacity-slide" name="interact-layer-9-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-10" name="interact-layer-10">
+                                        <label for="interact-layer-10" id="interact-layer-10-label">Plant Health</label>
+                                        <div id="interact-layer-10-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-10-opacity-val" name="interact-layer-10-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-10-opacity-slide" name="interact-layer-10-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-11" name="interact-layer-11">
+                                        <label for="interact-layer-11" id="interact-layer-11-label">Land Use Classes</label>
+                                        <div id="interact-layer-11-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-11-opacity-val" name="interact-layer-11-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-11-opacity-slide" name="interact-layer-11-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="interact-layer-12" name="interact-layer-12">
+                                        <label for="interact-layer-12" id="interact-layer-12-label">Winter Temperature</label>
+                                        <div id="interact-layer-12-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" class="opacity-control" id="interact-layer-12-opacity-val" name="interact-layer-12-slide" min="0"
+                                                max="100" value="70">
+                                            <br/>
+                                            <input type="range" class="opacity-control-slide" id="interact-layer-12-opacity-slide" name="interact-layer-12-slide" min="0"
+                                                max="100" value="70">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="mb-1" >
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#layer-collapse" aria-expanded="true">
+                                Geodata Layers
+                            </button>
+                            
+                            <div class="collapse" id="layer-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    
+                                        <strong><p style="padding-left: 20px;margin-top: 10px;"> Social Vulnerability </p></strong>
+                                    
+                                    <li style="margin-left: 25px; margin-top: 10px ;margin-bottom: 10px;">
+                                        
+                                        <input type="checkbox" id="add-layer-1" name="add-layer-1">
+                                        
+                                        <label for="add-layer-1" id="add-layer-1-label">Dummy layer 1</label>
+                                        <div id="layer-1-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-1-val" name="layer-1-val" min="0"
+                                                max="100" value="60">
+                                            <br/>
+                                            <input type="range" id="layer-1-slide" name="layer-1-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-2" name="add-layer-2">
+                                        <label for="add-layer-2" id="add-layer-2-label">Dummy layer 2</label>
+                                        <div id="layer-2-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-2-val" name="layer-2-slide" min="0"
+                                                max="100" value="60">
+                                            <br />
+                                            <input type="range" id="layer-2-slide" name="layer-2-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>  
+                                    
+                                    <strong><p style="padding-left: 20px;margin-top: 10px;"> Drive Time </p></strong>
+
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-3" name="add-layer-3">
+                                        <label for="add-layer-3" id="add-layer-3-label">Dummy layer 3</label>
+                                        <div id="layer-3-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-3-val" name="layer-3-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-3-slide" name="layer-3-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-4" name="add-layer-4">
+                                        <label for="add-layer-4" id="add-layer-4-label">Dummy layer 4</label>
+                                        <div id="layer-4-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-4-val" name="layer-4-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-4-slide" name="layer-4-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-5" name="add-layer-5">
+                                        <label for="add-layer-5" id="add-layer-5-label">Dummy layer 5</label>
+                                        <div id="layer-5-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-5-val" name="layer-5-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-5-slide" name="layer-5-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+
+                                    <strong><p style="padding-left: 20px;margin-top: 10px;"> Economic </p></strong>
+
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-6" name="add-layer-6">
+                                        <label for="add-layer-6" id="add-layer-6-label">Dummy layer 6</label>
+                                        <div id="layer-6-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-6-val" name="layer-6-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-6-slide" name="layer-6-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-7" name="add-layer-7">
+                                        <label for="add-layer-7" id="add-layer-7-label">Dummy layer 7</label>
+                                        <div id="layer-7-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-7-val" name="layer-7-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-7-slide" name="layer-7-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    <!-- <strong><p style="padding-left: 20px;margin-top: 10px;"> Socioeconomic </p></strong> -->
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-8" name="add-layer-8">
+                                        <label for="add-layer-8" id="add-layer-8-label">Dummy layer 8</label>
+                                        <div id="layer-8-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-8-val" name="layer-8-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-8-slide" name="layer-8-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-9" name="add-layer-9">
+                                        <label for="add-layer-9" id="add-layer-9-label">Dummy layer 9</label>
+                                        <div id="layer-9-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-9-val" name="layer-9-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-9-slide" name="layer-9-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 10px;">
+                                        <input type="checkbox" id="add-layer-10" name="add-layer-10">
+                                        <label for="add-layer-10" id="add-layer-10-label">Dummy layer 10</label>
+                                        <div id="layer-10-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-10-val" name="layer-10-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-10-slide" name="layer-10-slide" min="0"
+                                                max="100" value="60">
+
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-11" name="add-layer-11">
+                                        <label for="add-layer-11" id="add-layer-11-label">Dummy layer 11</label>
+                                        <div id="layer-11-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-11-val" name="layer-11-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-11-slide" name="layer-11-slide" min="0"
+                                                max="100" value="60">
+                                        </div>
+
+                                        
+                                    </li>
+
+                                    <strong><p style="padding-left: 20px;margin-top: 10px;"> Bio-Physical </p></strong>
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-12" name="add-layer-12">
+                                        <label for="add-layer-12" id="add-layer-12-label">Dummy layer 12</label>
+                                        <div id="layer-12-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-12-val" name="layer-12-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-12-slide" name="layer-12-slide" min="0"
+                                                max="100" value="60">
+
+                                        </div>
+                                    </li>
+
+                                    
+
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-13" name="add-layer-13">
+                                        <label for="add-layer-13" id="add-layer-13-label">Dummy layer 13</label>
+                                        <div id="layer-13-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-13-val" name="layer-13-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-13-slide" name="layer-13-slide" min="0"
+                                                max="100" value="60">
+                                            
+                                        </div>
+                                    </li>
+
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-14" name="add-layer-14">
+                                        <label for="add-layer-14" id="add-layer-14-label">Dummy layer 14</label>
+                                        <div id="layer-14-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-14-val" name="layer-14-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-14-slide" name="layer-14-slide" min="0"
+                                                max="100" value="60">
+                                            
+                                        </div>
+                                    </li>
+
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-15" name="add-layer-15">
+                                        <label for="add-layer-15" id="add-layer-15-label">Dummy layer 15</label>
+                                        <div id="layer-15-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-15-val" name="layer-15-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-15-slide" name="layer-15-slide" min="0"
+                                                max="100" value="60">
+                                            
+                                        </div>
+                                    </li>
+                                    <li style="margin-left: 25px; margin-top: 11px;">
+                                        <input type="checkbox" id="add-layer-16" name="add-layer-16">
+                                        <label for="add-layer-16" id="add-layer-16-label">Dummy layer 16</label>
+                                        <div id="layer-16-slide-div" style="display: none;">
+                                            opacity:
+                                            <input type="number" id="layer-16-val" name="layer-16-slide" min="0"
+                                                max="100" value="60">
+                                            <br>
+                                            <input type="range" id="layer-16-slide" name="layer-16-slide" min="0"
+                                                max="100" value="60">
+                                            
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a id="show-scrapped" class="nav-link" href="#">
+                                <!-- <span data-feather="file"></span> -->
+                                
+                                Show Vulnerability
+                                
+                            </a>
+                                
+                            <div id="show-scrapped-legends" style="display: none;">
+                                
+                            </div>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a id="select-data-column" href="#" class="nav-link link-dark">
+
+                                Show DSV Indicators
+                            
+                            </a>
+                            <div id="show-dsv-column-selection" style="display: none; padding-left: 20px;" >
+
+                                <a href="" class="nav-link link-dark" data-toggle="modal" data-target="#myModal">
+                                    
+                                    Select data column
+                                
+                                </a>
+                            
+                            </div>
+                        </li>
+                   
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="draw-aoi" href="#">
+                                <span data-feather="shopping-cart"></span>
+                                Draw Area of Interest
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" id="fetch-aoi" href="#">
+                                <!-- <span data-feather="users"></span> -->
+                                <div class="spinner-border" id="fetch-aoi-loading" role="status" 
+                                    style="width: 15px; height: 15px; display: none;">
+                                    <!-- <span class="sr-only">Loading...</span> -->
+                                </div>
+                                <!-- " " -->
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#statistic-sec">
+                                <span data-feather="bar-chart-2"></span>
+
+                                Statistics
+                            
+                            </a>
+                        </li> -->
+           
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h4">
+                        
+                        Map Window
+                    
+                    </h1>
+                </div>
+                <!-- changed width to 100% -->
+                <div id="mapid" class="" style="height: 850px; width: 100%;"></div>
+                <button type="button" id="analyze-button"></button>
+                <br /> <br />
+                <!-- <br /> <br />  -->
+                <!-- <h3 id="statistic-sec">
+                    
+                    Statistics
+                
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Number of Entities</th>
+                                <th scope="col">Average Distance (in meters)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stat-table">
+
+                        </tbody>
+                    </table>
+                </div> -->
+                <!-- <div id="charts-scatter-container"  style="height: 400px; width: 600px; float: left;"></div>
+                <div id="charts-heatmap" style="height: 500px; width: 650px; float:left; padding: 30px;"></div> -->
+            </main>
+        </div>
+    </div>
+
+   <!-- Modal -->
+   <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Select column</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Years lived in place of residence
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Frequency of watching television
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Confirm Selection</button>
+            </div>
+        </div>
+
+        </div>
+    </div> 
+    <script type="module" src="assets/dist/js/global_states.js"></script>
+    <script type="module" src="assets/dist/js/select_column.js"></script>
+    <script type="module" src="assets/dist/js/data_analyze.js">
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.js"></script>
+    <script type="module" src="assets/dist/js/charts-scatter.js"></script>
+    <script type="module" src="assets/dist/js/charts-heatmap.js"></script>
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+        integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        crossorigin="anonymous"></script>
+    <script src="assets/dist/js/dashboard.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_edu_dd.geojson"></script>  <!-- edu -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_finan_dd.geojson"></script> <!-- finan -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_health_dd_clp.geojson"></script>  <!-- heal -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_max_temp _class.geojson"></script> <!-- temp -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_NDVI _class.geojson"></script> <!-- ndvi -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_NTL_VNL_npp_2016_average.geojson"></script> <!-- NTL -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_ppp_population.geojson"></script> <!-- pop -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_tj_cellt.geojson"></script> <!-- cell -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics_Tj_landuse _class.geojson"></script> <!-- lu -->
+    <script src="assets/dist/js/TJ_gadm_3_zonal statsics-DEM.geojson"></script>    <!-- ele -->
+    <script src="assets/dist/js/adm3_random_forest_zonal_stats.geojson"></script> <!-- rf -->
+    <script src="assets/dist/js/adm3_XGBoost_zonal_stats.geojson"></script>  <!-- xgb -->
+    <script src="assets/dist/js/aoi.js"></script>
+    <script src="assets/dist/js/util.js"></script>
+    <script src="assets/dist/js/modal.js"></script>
+    <script type="module" src="assets/dist/js/interact_map.js"></script>
+    <script type="module" src="assets/dist/js/app.js" > </script>
+</body>
+
+</html>
